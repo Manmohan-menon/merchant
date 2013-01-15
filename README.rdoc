@@ -1,0 +1,4 @@
+== Welcome Merchant
+
+Created in tandem using the instructions given in the tutorial of jumpstartlab's rails tutorial of the same name. 
+
