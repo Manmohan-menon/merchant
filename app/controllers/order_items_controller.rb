@@ -2,12 +2,8 @@ class OrderItemsController < ApplicationController
   before_filter :load_order
 
   def create
-    @order_item = @order.order_items.new(quantity: 1, product_id: params[:product_id])
-    if @order_item.save
-      redirect_to @order, :notice => "Successfully created order item."
-    else
-      render action: 'new'
-    end
+    @order.order_items.create(quantity: 1, product_id: params[:product_id])
+    redirect_to @order, :notice => "Successfully created order item."
   end
 
   def edit
@@ -24,12 +20,7 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
-    @orders = Order.all
-    @order_item = OrderItem.find(params[:id])
-    if @order_item.destroy
-      redirect_to order_path(@order), :notice => "Successfully destroyed order item."
-    else
-      render action: 'edit'
-    end
+    @order_item = OrderItem.destroy(params[:id])
+    redirect_to order_path(@order_item.order), :notice => "Successfully destroyed order item."
   end
 end
